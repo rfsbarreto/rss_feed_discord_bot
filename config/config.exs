@@ -10,3 +10,9 @@ config :rss_feed_discord_bot, RssFeedDiscordBot.Repo,
   username: System.get_env("DB_USERNAME"),
   password: System.get_env("DB_PASSWORD"),
   hostname: System.get_env("DB_HOSTNAME")
+
+
+config :rss_feed_discord_bot, Oban, 
+  repo: RssFeedDiscordBot.Repo,
+  plugins: [Oban.Plugins.Prunner]
+  queues: [default: 1]
