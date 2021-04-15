@@ -14,5 +14,8 @@ config :rss_feed_discord_bot, RssFeedDiscordBot.Repo,
 
 config :rss_feed_discord_bot, Oban, 
   repo: RssFeedDiscordBot.Repo,
-  plugins: [Oban.Plugins.Prunner]
+  plugins: [Oban.Plugins.Prunner,
+    {Oban.Plugins.Cron,
+      crontab: [
+        {"0 */2 * * *", RssFeed.Job}]}]
   queues: [default: 1]
