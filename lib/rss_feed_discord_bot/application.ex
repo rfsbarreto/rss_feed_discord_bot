@@ -16,8 +16,7 @@ defmodule RssFeedDiscordBot.Application do
       Repo,
       {Oban, oban_config()},
       {RssWatcher,
-       url: "http://lorem-rss.herokuapp.com/feed?unit=second&interval=30",
-       callback: &FeedConsumer.consume_post/1}
+       url: "https://jovemnerd.com.br/nerdbunker/feed/", callback: &FeedConsumer.consume_post/1}
       # Starts a worker by calling: RssFeedDiscordBot.Worker.start_link(arg)
       # {RssFeedDiscordBot.Worker, arg}
     ]
