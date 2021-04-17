@@ -8,6 +8,7 @@ defmodule RssFeedDiscordBot.Application do
   alias DiscordBot.Consumer
   alias RssFeedDiscordBot.Repo
   alias Feed.Consumer, as: FeedConsumer
+  alias RssFeed.Router
 
   @impl true
   def start(_type, _args) do
@@ -15,7 +16,11 @@ defmodule RssFeedDiscordBot.Application do
       Consumer,
       Repo,
       {RssWatcher,
-       url: "https://jovemnerd.com.br/nerdbunker/feed/", callback: &FeedConsumer.consume_post/1}
+       url: "https://jovemnerd.com.br/nerdbunker/feed/", callback: &FeedConsumer.consume_post/1},
+      {Plug.Cowboy,
+       scheme: :http,
+       plug: Router,
+       options: [port: (System.get_env("PORT") || "8080") |> String.to_integer()]}
       # Starts a worker by calling: RssFeedDiscordBot.Worker.start_link(arg)
       # {RssFeedDiscordBot.Worker, arg}
     ]

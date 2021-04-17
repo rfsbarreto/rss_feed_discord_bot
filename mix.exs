@@ -29,6 +29,7 @@ defmodule RssFeedDiscordBot.MixProject do
       {:postgrex, ">= 0.15.0"},
       # For HTTP requests
       {:tesla, "~> 1.2.1"},
+      {:plug_cowboy, "~> 2.0"},
       # For RSS parsing
       {:fiet, "~> 0.2.1"},
       # For timestamp parsing
