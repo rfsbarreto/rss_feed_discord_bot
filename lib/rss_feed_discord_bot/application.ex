@@ -5,13 +5,19 @@ defmodule RssFeedDiscordBot.Application do
 
   use Application
 
-  alias RssFeedDiscordBot.Consumer
+  alias DiscordBot.Consumer
+  alias RssFeedDiscordBot.Repo
+  alias Feed.Consumer, as: FeedConsumer
 
   @impl true
   def start(_type, _args) do
     children = [
       Consumer,
-      {Oban, oban_config()} 
+      Repo,
+      {Oban, oban_config()},
+      {RssWatcher,
+       url: "http://lorem-rss.herokuapp.com/feed?unit=second&interval=30",
+       callback: &FeedConsumer.consume_post/1}
       # Starts a worker by calling: RssFeedDiscordBot.Worker.start_link(arg)
       # {RssFeedDiscordBot.Worker, arg}
     ]
