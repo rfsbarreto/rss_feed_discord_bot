@@ -14,7 +14,6 @@ defmodule RssFeedDiscordBot.Application do
     children = [
       Consumer,
       Repo,
-      {Oban, oban_config()},
       {RssWatcher,
        url: "https://jovemnerd.com.br/nerdbunker/feed/", callback: &FeedConsumer.consume_post/1}
       # Starts a worker by calling: RssFeedDiscordBot.Worker.start_link(arg)
@@ -25,9 +24,5 @@ defmodule RssFeedDiscordBot.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: RssFeedDiscordBot.Supervisor]
     Supervisor.start_link(children, opts)
-  end
-
-  defp oban_config() do
-    Application.fetch_env!(:rss_feed_discord_bot, Oban)
   end
 end

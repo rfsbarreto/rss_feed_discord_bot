@@ -23,9 +23,10 @@ defmodule RssFeedDiscordBot.MixProject do
   defp deps do
     [
       {:nostrum, "~> 0.4"},
-      {:oban, "~> 2.6.1"},
       {:rss_watcher, "~> 0.1.0"},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
+      {:ecto_sql, "~> 3.0"},
+      {:postgrex, ">= 0.0.0"},
       # For HTTP requests
       {:tesla, "~> 1.2.1"},
       # For RSS parsing
