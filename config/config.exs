@@ -11,11 +11,12 @@ config :rss_feed_discord_bot, RssFeedDiscordBot.Repo,
   password: System.get_env("DB_PASSWORD"),
   hostname: System.get_env("DB_HOSTNAME")
 
-
-config :rss_feed_discord_bot, Oban, 
+config :rss_feed_discord_bot, Oban,
   repo: RssFeedDiscordBot.Repo,
-  plugins: [Oban.Plugins.Prunner,
+  plugins: [
     {Oban.Plugins.Cron,
-      crontab: [
-        {"0 */2 * * *", RssFeed.Job}]}]
+     crontab: [
+       {"0 */2 * * *", RssFeed.Job}
+     ]}
+  ],
   queues: [default: 1]
