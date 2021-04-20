@@ -4,7 +4,7 @@ defmodule Feed.Consumer do
   def consume_post(%RssWatcher.Feed.Item{link: url, title: title, published_at: published_at}) do
     804_435_915_270_520_863
     |> DiscordBot.send_message(
-      "Título: #{title} \n publicado: #{convert_to_brazil_timezone(published_at)} \n link: #{url}"
+      "Título: #{title} \n link: #{url}"
     )
   end
 
